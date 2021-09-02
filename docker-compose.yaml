@@ -1,0 +1,31 @@
+version: '3.5'
+
+services: 
+  db:
+    image: mongo
+    restart: always
+    container_name: meusgastos-db
+    ports: 
+      - 27017:27017
+    networks: 
+      - main_network
+    volumes: 
+      - ./database:/data/db
+  api:
+    container_name: meusgastos-api
+    restart: always
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+    ports: 
+      - 5001:5001
+    volumes: 
+      - ./api:/usr/src/app
+    networks: 
+      - main_network
+    depends_on: 
+      - db
+
+networks: 
+  main_network:
+    driver: bridge

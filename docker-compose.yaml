@@ -21,7 +21,7 @@ services:
       - ./api:/usr/src/app
     networks: 
       - main_network
-    links: 
+    depends_on: 
       - db
 
 networks: 

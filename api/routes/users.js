@@ -31,6 +31,10 @@ router.post('/signup', cors.corsWithOptions, (req, res, next) => {
           user.firstname = req.body.firstname;
         if (req.body.lastname)
           user.lastname = req.body.lastname;
+        if (req.body.email)
+          user.email = req.body.email;
+        if (req.body.admin)
+          user.admin = req.body.admin;
         user.save((err, user) => {
           if (err) {
             res.statusCode = 500;
@@ -50,6 +54,7 @@ router.post('/signup', cors.corsWithOptions, (req, res, next) => {
 
 router.post('/login', cors.corsWithOptions, passport.authenticate('local'), (req, res) => {
   var token = authenticate.getToken({ _id: req.user._id });
+  console.log(token)
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
   res.json({ success: true, token: token, status: 'You are successfully logged in!' });

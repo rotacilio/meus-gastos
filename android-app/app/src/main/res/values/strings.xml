@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Meus Gastos</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="hint_confirm_password">Type your password again</string>
+    <string name="hint_password">Type your password</string>
+    <string name="hint_email">Type your email</string>
+    <string name="hint_last_name">Type your last name</string>
+    <string name="hint_first_name">Type your first name</string>
 </resources>

@@ -3,7 +3,6 @@ version: '3.5'
 services: 
   db:
     image: mongo
-    restart: always
     container_name: meusgastos-db
     ports: 
       - 27017:27017
@@ -13,7 +12,6 @@ services:
       - ./database:/data/db
   api:
     container_name: meusgastos-api
-    restart: always
     build: 
       context: ./api
       dockerfile: Dockerfile
@@ -23,7 +21,7 @@ services:
       - ./api:/usr/src/app
     networks: 
       - main_network
-    depends_on: 
+    links: 
       - db
 
 networks: 

@@ -5,15 +5,17 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.rotacilio.meusgastos.BuildConfig
 import br.com.rotacilio.meusgastos.api.models.CreateUserResponse
 import br.com.rotacilio.meusgastos.models.User
 import br.com.rotacilio.meusgastos.repositories.UserRepository
+import br.com.rotacilio.meusgastos.utils.Utils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
 
-class SignUpViewModel(private val repo: UserRepository) : ViewModel(), Callback<CreateUserResponse> {
+class SignUpViewModel(private val repo: UserRepository) : ViewModel() {
 
     val firstName = MutableLiveData<String>()
     val lastName = MutableLiveData<String>()
@@ -75,23 +77,24 @@ class SignUpViewModel(private val repo: UserRepository) : ViewModel(), Callback<
     }
 
     private fun storeUser(data: User) {
-        repo.storeUser(data)
-    }
+        repo.storeUser(data).enqueue(object : Callback<CreateUserResponse> {
+            override fun onResponse(
+                call: Call<CreateUserResponse>,
+                response: Response<CreateUserResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.i("SignUpViewModel", response.body().toString())
+                    _successfulRegistered.postValue(true)
+                    return
+                }
+                _successfulRegistered.postValue(false)
+            }
 
-    override fun onResponse(
-        call: Call<CreateUserResponse>,
-        response: Response<CreateUserResponse>
-    ) {
-        if (response.isSuccessful) {
-            Log.i("SignUpViewModel", response.body().toString())
-            _successfulRegistered.postValue(true)
-            return
-        }
-        _successfulRegistered.postValue(false)
-    }
+            override fun onFailure(call: Call<CreateUserResponse>, t: Throwable) {
+                Log.e("SignUpViewModel", t.message!!)
+                _successfulRegistered.postValue(false)
+            }
 
-    override fun onFailure(call: Call<CreateUserResponse>, t: Throwable) {
-        Log.e("SignUpViewModel", "onFailure: ${t.message}")
-        _successfulRegistered.postValue(false)
+        })
     }
 }

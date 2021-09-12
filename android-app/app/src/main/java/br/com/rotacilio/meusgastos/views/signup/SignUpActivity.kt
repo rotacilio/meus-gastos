@@ -28,10 +28,16 @@ class SignUpActivity : AppCompatActivity() {
             successfulRegistered.observe(this@SignUpActivity) { result ->
                 if (result) {
                     Log.i("SignUpActivity", "configureObservers: $result")
+                    finish()
                 } else {
                     Toast.makeText(this@SignUpActivity, "Não foi possível criar este usuário.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

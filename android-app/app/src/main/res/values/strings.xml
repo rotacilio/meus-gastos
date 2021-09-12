@@ -6,4 +6,9 @@
     <string name="hint_email">Type your email</string>
     <string name="hint_last_name">Type your last name</string>
     <string name="hint_first_name">Type your first name</string>
+    <string name="username">Nome de usuário</string>
+    <string name="password">Senha</string>
+    <string name="sign_in">Entrar</string>
+    <string name="forgot_password">Esqueceu sua senha?</string>
+    <string name="create_account">Criar conta</string>
 </resources>

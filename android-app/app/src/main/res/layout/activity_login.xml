@@ -4,13 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="loginViewModel"
+            type="br.com.rotacilio.meusgastos.views.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".views.login.LoginActivity">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_top"
+            android:layout_marginHorizontal="@dimen/default_margin_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/idEdtTxtUsernameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="@dimen/default_edittext_box_radius"
+                app:boxCornerRadiusBottomStart="@dimen/default_edittext_box_radius"
+                app:boxCornerRadiusTopStart="@dimen/default_edittext_box_radius"
+                app:boxCornerRadiusTopEnd="@dimen/default_edittext_box_radius"
+                app:hintEnabled="true"
+                android:hint="@string/username">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/idEdtTxtUsernameInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textEmailAddress"
+                    android:text="@={loginViewModel.username}">
+                    <requestFocus />
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/idEdtTxtPasswordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="@dimen/default_edittext_box_radius"
+                app:boxCornerRadiusBottomStart="@dimen/default_edittext_box_radius"
+                app:boxCornerRadiusTopStart="@dimen/default_edittext_box_radius"
+                app:boxCornerRadiusTopEnd="@dimen/default_edittext_box_radius"
+                app:hintEnabled="true"
+                android:hint="@string/password">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/idEdtTxtPasswordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="numberPassword"
+                    android:text="@={loginViewModel.password}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/btnForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/forgot_password"
+                android:textColor="?attr/colorPrimary"
+                android:layout_gravity="end"
+                android:onClick="@{() -> loginViewModel.onClickForgotPassword()}"/>
+
+            <Button
+                android:id="@+id/btnSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:paddingHorizontal="36dp"
+                android:paddingVertical="12dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/sign_in"
+                android:onClick="@{() -> loginViewModel.onClickLogin()}"/>
+
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                android:textColor="?attr/colorPrimary"
+                android:text="@string/create_account"
+                android:textAllCaps="false" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
